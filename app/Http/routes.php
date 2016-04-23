@@ -16,3 +16,7 @@ Route::get('/', function () {
 Route::get('shoutbox','homeController@main');
 
 Route::post('submit','homeController@shout');
+Route::get('/Counter',array(
+    'as'=>'Counter',
+    'uses'=>'counterController@home'
+));

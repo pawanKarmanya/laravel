@@ -14,7 +14,7 @@ class homeController extends Controller
 
     public function main() {
         
-        return view('shoutbox');
+        
        
 	}
         
