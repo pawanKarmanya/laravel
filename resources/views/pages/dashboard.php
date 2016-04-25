@@ -34,11 +34,6 @@
 
 
 
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="active"><a href=""><span class="glyphicon glyphicon-off"></span> LogOut</a></li>
-
-                    </ul>
-
                 </div>
             </div>
         </nav>

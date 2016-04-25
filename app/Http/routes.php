@@ -31,3 +31,15 @@ Route::get('imageupload/home',array(
     'as'=>'homeimage',
     'uses'=>'imageController@home'
 ));
+Route::post('imageupload/login',array(
+    'as'=>'loginUser',
+    'uses'=>'imageController@login'
+));
+Route::post('imageupload/registration',array(
+    'as'=>'registersubmit',
+    'uses'=>'imageController@registersubmit'
+));
+Route::get('translate',array(
+    "as"=>'translate',
+    'uses'=>'translateController@translate'
+));

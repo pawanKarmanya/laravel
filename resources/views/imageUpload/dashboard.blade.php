@@ -12,6 +12,9 @@
                 font-size: 2em;
                
             }
+            li:hover{
+                background-color: #DBDBDB;
+            }
       
         </style>
     </head>
@@ -32,17 +35,20 @@
                     <ul class="nav navbar-nav ">
                         <li ><a href="{{ URL::route('homeimage')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li ><a href="{{ URL::route('register')}}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-
-
                     </ul>
+                    <form class="navbar-form navbar-right loginform" action="{{ URL::route('loginUser')}}" method="post">
+                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                        <div class="form-group ">
+                            <input type="email" placeholder="User Email Address" name="userEmail" class="form-control left" required>
 
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="User Password" name="userPassword" class="form-control left" required>
 
+                        </div>
+                        <div class="form-group"><input type="submit" class="btn btn-success left" name="loginSubmit" value="LogIn"></div>
 
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="active"><a href=""><span class="glyphicon glyphicon-off"></span> LogOut</a></li>
-
-                    </ul>
-
+                    </form>
                 </div>
             </div>
         </nav>
