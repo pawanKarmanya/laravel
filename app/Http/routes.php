@@ -20,3 +20,14 @@ Route::get('/Counter',array(
     'as'=>'Counter',
     'uses'=>'counterController@home'
 ));
+Route::get('templateEngine','templateController@engine');
+Route::get('imageupload','imageController@home');
+//Route::get('register','imageController@register');
+Route::get('imageupload/register',array(
+    'as'=>'register',
+    'uses'=>'imageController@register'
+));
+Route::get('imageupload/home',array(
+    'as'=>'homeimage',
+    'uses'=>'imageController@home'
+));

@@ -1,0 +1,1 @@
+[$username] is [$age] years old and his food is [$fav_food]!
