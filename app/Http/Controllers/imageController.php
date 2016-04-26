@@ -13,6 +13,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Facades\Redirect;
+use DateTime;
 
 class imageController extends Controller {
 
@@ -22,7 +23,8 @@ class imageController extends Controller {
         ValidatesRequests;
 
     public function home() {
-        
+        session()->regenerate();
+        session(['id' => null]);
         return View('imageUpload/homeimage');
     }
 
@@ -33,41 +35,41 @@ class imageController extends Controller {
 
     public function login() {
         session()->regenerate();
-        if(session('id')!==null){
-        
-            $user = DB::table('UserDetails')->select('Name','UserId')->where('UserId', session('id'))->get();
-       foreach($user as $value){
-                foreach($value as $x=>$y){
-                    if($x=='UserId'){
-                       session(['id'=>$y]);
+        if (session('id') !== null) {
+
+            $user = DB::table('UserDetails')->select('Name', 'UserId')->where('UserId', session('id'))->get();
+            foreach ($user as $value) {
+                foreach ($value as $x => $y) {
+                    if ($x == 'UserId') {
+                        session(['id' => $y]);
                     }
-                    if($x=='Name'){
-                        $name1=$y;
+                    if ($x == 'Name') {
+                        $name1 = $y;
                     }
                 }
             }
             return view("imageUpload/userLogin", array(
                 "Name" => $name1
-           ));
+            ));
         }
         $LoginEmailAddress = Input::get('userEmail');
         $LoginPassword = Input::get('userPassword');
-        $users = DB::table('UserDetails')->select('Name','UserId')->where('Email', $LoginEmailAddress)->where('Password', $LoginPassword)->get();
-        
+        $users = DB::table('UserDetails')->select('Name', 'UserId')->where('Email', $LoginEmailAddress)->where('Password', $LoginPassword)->get();
+
         if ($users) {
-            foreach($users as $value){
-                foreach($value as $x=>$y){
-                    if($x=='UserId'){
-                       session(['id'=>$y]);
+            foreach ($users as $value) {
+                foreach ($value as $x => $y) {
+                    if ($x == 'UserId') {
+                        session(['id' => $y]);
                     }
-                    if($x=='Name'){
-                        $name=$y;
+                    if ($x == 'Name') {
+                        $name = $y;
                     }
                 }
             }
-            
-          return view("imageUpload/userLogin", array(
-             "Name" => $name
+
+            return view("imageUpload/userLogin", array(
+                "Name" => $name
             ));
         } else {
             return View('imageUpload/homeimage', array(
@@ -87,7 +89,7 @@ class imageController extends Controller {
                     'Email' => $EmailAddress,
                     'Password' => $Password]
         );
-        if ($Insert == 0) {
+        if ($Insert == 1) {
             $validate = "Registration Complete successfully Please Login";
         } else {
             $validateError = "Could not register try again later";
@@ -98,15 +100,62 @@ class imageController extends Controller {
             'error' => $validateError
         ));
     }
-    public function hai(){
+
+    public function albums() {
+
+        session()->regenerate();
+        $UserId = session('id');
+        $Album = DB::table('AlbumDetails')->select('Name', 'Desc')->where('UserId', session('id'))->get();
+        return view('imageUpload/useralbum', array(
+            'Album' => $Album
+        ));
+    }
+
+    public function createalbum() {
+
+        return view('imageUpload/usercreatealbum');
+    }
+
+    public function createalbumsubmit() {
+
+        session()->regenerate();
+        $UserId = session('id');
+        $AlbumName = Input::get('albumName');
+        $AlbumDesc = Input::get('albumDesc');
+        $validate = null;
+        $validateError = null;
+        $dt = new DateTime();
+        $Time = $dt->format('Y-m-d H:i:s');
+
+        $Insert = DB::table('AlbumDetails')->insert(
+                ['Name' => $AlbumName,
+                    'Desc' => $AlbumDesc,
+                    'UserId' => $UserId,
+                    'Time' => $Time]
+        );
+        if ($Insert == 1) {
+            $validate = "Album created successfully";
+        } else {
+            $validateError = "Could not create";
+        }
+        return view('imageUpload/usercreatealbum', array(
+            'message' => $validate,
+            'error' => $validateError
+        ));
+    }
+
+    public function imageuploadview(){
+        
+        return view('imageUpload/imageuploadview');
+    }
+    public function hai() {
         $values = Usermodel::all()->where('UserId', 10);
-       $array= $values->toArray();
-       foreach ($array as $values)
-       {
-           foreach ($values as$x=> $key){
-               echo $x," ",$key;
-           }
-       }
+        $array = $values->toArray();
+        foreach ($array as $values) {
+            foreach ($values as $x => $key) {
+                echo $x, " ", $key;
+            }
+        }
     }
 
 }
