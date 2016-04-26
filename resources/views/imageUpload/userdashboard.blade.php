@@ -10,12 +10,12 @@
         <style>
             #cloud{
                 font-size: 2em;
-               
+
             }
             li:hover{
                 background-color: #DBDBDB;
             }
-            
+
         </style>
     </head>
     <body>
@@ -23,6 +23,8 @@
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" id="cloud"><span  class="glyphicon glyphicon-film"></span></a>
+                    <ul class="nav navbar-nav">
+                        <li><a><span class="glyphicon glyphicon-user"></span> {{$Name}}</a></li></ul>
                     <button type="button" class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="sr-only"> Toggle</span>
                         <span class="icon-bar"></span>
@@ -32,23 +34,15 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav ">
-                        <li ><a href="{{ URL::route('homeimage')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li ><a href="{{ URL::route('register')}}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                    <ul class="nav navbar-nav pull-right">
+                        
+                        <li ><a href="{{ URL::route('loginUser')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li ><a href="{{ URL::route('register')}}"><span class="glyphicon glyphicon-folder-close"></span> Album</a></li>
+                        <li ><a href="{{ URL::route('register')}}"><span class="glyphicon glyphicon-folder-open"></span> CreateAlbum</a></li>
+                        <li ><a href="{{ URL::route('register')}}"><span class="glyphicon glyphicon-cloud-upload"></span> ImageUpload</a></li>
+
+                        <li ><a href="{{ URL::route('homeimage')}}"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right loginform" action="{{ URL::route('loginUser')}}" method="post">
-                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <div class="form-group ">
-                            <input type="email" placeholder="User Email Address" name="userEmail" class="form-control left" required>
-
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="User Password" name="userPassword" class="form-control left" required>
-
-                        </div>
-                        <div class="form-group"><input type="submit" class="btn btn-success left" name="loginSubmit" value="LogIn"></div>
-
-                    </form>
                 </div>
             </div>
         </nav>

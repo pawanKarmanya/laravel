@@ -5,7 +5,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{URL::asset('assets/css/custom.css')}}">
+        <link rel="stylesheet" href="/css/custom.css">
         
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         
@@ -14,27 +14,27 @@
         <nav >
            @include('imageUpload.dashboard');
         </nav>
-        <div class="container">
+        <div class="container ">
             <div class="col-md-12">
                 <div class="col-md-6 col-md-offset-4">
-                    <h2 class="bottom top"><u>REGISTRATION</u>   <u>FORM</u></h2></div>
+                    <h2 ><u>REGISTRATION</u>   <u>FORM</u></h2></div>
                     <form class="form-horizontal" action="{{ URL::route('registersubmit')}}" method="post">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <div class="form-group ">
+                        <div class="form-group text">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="firstName">FIRST NAME:</label>
                     <div class="col-sm-6">
                         <input type="text" id="firstName" name="firstName" class="form-control " required>
                     </div>
                     <p id="firstnamepara"></p>
                 </div>
-                <div class="form-group top ">
+                <div class="form-group">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="lastName">LAST NAME:</label>
                     <div class="col-sm-6">
                         <input type="text" id="lastName" name="lastName" class="form-control " required>
                     </div>
                     <p id="lastnamepara"></p>
                 </div>
-                <div class="form-group top">
+                <div class="form-group">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="emailAddress">EMAILADDRESS:</label>
                     <div class="col-sm-6">
                         <input type="text" id="emailAddress" class="form-control " name="emailAddress" required>
@@ -42,7 +42,7 @@
                     <p id="emailpara"></p>
                 </div>
 
-                <div class="form-group top">
+                <div class="form-group">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="password">PASSWORD:</label>
                     <div class="col-sm-6">
                         <input type="password" maxlength="13" id="password" name="password" class="form-control " required>
@@ -50,7 +50,7 @@
                     <p id="passwordpara"></p>
                 </div>
 
-                <div class="form-group top">
+                <div class="form-group">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="confirmPassword">CONFIRM PASSWORD:</label>
                     <div class="col-sm-6">
                         <input type="password" maxlength="13" id="confirmPassword" name="confirmPassword" class="form-control "  required>
@@ -59,7 +59,7 @@
                 </div>
 
 
-                <div class="form-group top">
+                <div class="form-group ">
                     <div class=" col-sm-offset-3 col-sm-6">
                         <input type="submit"  class="btn btn-success left" name="submitSignUp" value="SUBMIT">
                         <input type="reset"  class="btn btn-success left" value="RESET">

@@ -19,7 +19,7 @@
     </head>
     <body>
         <nav >
-           @include('imageUpload.dashboard');
+           @include('imageUpload.dashboard')
         </nav>
         <div class="container">
             <div class="col-md-5 col-md-offset-4">

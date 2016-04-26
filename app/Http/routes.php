@@ -31,7 +31,11 @@ Route::get('imageupload/home',array(
     'as'=>'homeimage',
     'uses'=>'imageController@home'
 ));
-Route::post('imageupload/login',array(
+Route::post('imageupload',array(
+    'as'=>'loginUser',
+    'uses'=>'imageController@login'
+));
+Route::get('imageupload',array(
     'as'=>'loginUser',
     'uses'=>'imageController@login'
 ));
@@ -43,3 +47,4 @@ Route::get('translate',array(
     "as"=>'translate',
     'uses'=>'translateController@translate'
 ));
+Route::get("hai",'imageController@hai');
