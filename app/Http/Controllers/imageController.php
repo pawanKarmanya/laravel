@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //namespace App\Http\Controllers\Redirect;
 use App\Usermodel;
 use File;
+use Illuminate\Support\Facades\Storage;
 Use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -126,7 +127,11 @@ class imageController extends Controller {
         $validateError = null;
         $dt = new DateTime();
         $Time = $dt->format('Y-m-d H:i:s');
-
+        $path='directory/'.$UserId;
+        if (!File::exists($path)) {
+            File::makeDirectory($path);
+        }
+        File::makeDirectory($path."/".$AlbumName);
         $Insert = DB::table('AlbumDetails')->insert(
                 ['Name' => $AlbumName,
                     'Desc' => $AlbumDesc,
@@ -146,7 +151,42 @@ class imageController extends Controller {
 
     public function imageuploadview(){
         
-        return view('imageUpload/imageuploadview');
+        session()->regenerate();
+        $UserId = session('id');
+        $Album = DB::table('AlbumDetails')->select('Name')->where('UserId', session('id'))->get();
+        return view('imageUpload/imageuploadview',array(
+            'Album' => $Album));
+    }
+    public function imageupload(){
+        session()->regenerate();
+        $UserId = session('id');
+        $image = Input::file('imageupload');
+        $album=Input::get('albumname');
+        $path='directory/'.$UserId."/".$album."/";
+        $fileName = Input::file('imageupload')->getClientOriginalName();
+       if( Input::file('imageupload')->move($path, $fileName)){
+        return view('imageUpload/userLogin',array(
+            'message'=>'Image uploaded Successfully'
+       ));
+       }
+       else{
+           return view('imageUpload/userLogin',array(
+            'error'=>'Image could not be uploaded'
+       ));
+       }
+    }
+    public function viewalbum($name){
+        
+        session()->regenerate();
+        $UserId = session('id');
+        $path='directory/'.$UserId."/".$name;
+        $images=File::files($path);
+        if($images){
+            
+             return view('imageUpload/viewimage',array(
+            'images'=>$images
+       ));
+        }
     }
     public function hai() {
         $values = Usermodel::all()->where('UserId', 10);

@@ -14,26 +14,20 @@
         <nav >
            @include('imageUpload.dashboard');
         </nav>
-        <div class="container ">
+        <div class="container">
             <div class="col-md-12">
                 <div class="col-md-6 col-md-offset-4">
                     <h2 ><u>REGISTRATION</u>   <u>FORM</u></h2></div>
                     <form class="form-horizontal" action="{{ URL::route('registersubmit')}}" method="post">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="form-group text">
-                    <label class="control-label col-sm-2 col-sm-offset-1" for="firstName">FIRST NAME:</label>
+                    <label class="control-label col-sm-2 col-sm-offset-1" for="firstName">NAME:</label>
                     <div class="col-sm-6">
                         <input type="text" id="firstName" name="firstName" class="form-control " required>
                     </div>
                     <p id="firstnamepara"></p>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2 col-sm-offset-1" for="lastName">LAST NAME:</label>
-                    <div class="col-sm-6">
-                        <input type="text" id="lastName" name="lastName" class="form-control " required>
-                    </div>
-                    <p id="lastnamepara"></p>
-                </div>
+                
                 <div class="form-group">
                     <label class="control-label col-sm-2 col-sm-offset-1" for="emailAddress">EMAILADDRESS:</label>
                     <div class="col-sm-6">

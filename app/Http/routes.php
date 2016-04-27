@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('shoutbox', 'homeController@main');
+
 
 Route::post('submit', 'homeController@shout');
 Route::get('/Counter', array(
@@ -22,8 +22,11 @@ Route::get('/Counter', array(
     'uses' => 'counterController@home'
 ));
 Route::get('templateEngine', 'templateController@engine');
+
+//Image upload website
+
 Route::get('imageupload', 'imageController@home');
-//Route::get('register','imageController@register');
+
 Route::get('imageupload/register', array(
     'as' => 'register',
     'uses' => 'imageController@register'
@@ -46,11 +49,28 @@ Route::get('translate', array(
     'uses' => 'translateController@translate'
 ));
 Route::get("hai", 'imageController@hai');
-Route::get("imageupload/albums", array(
+
+Route::get("imageupload/showalbums", array(
     'as' => 'albums',
     'uses' => "imageController@albums"
 ));
-Route::get("imageupload/albums", array(
+Route::get("imageupload/createalbums", array(
     'as' => 'createalbum',
     'uses' => "imageController@createalbum"
 ));
+Route::get("imageupload/uploadimage", array(
+    'as' => 'imageupload',
+    'uses' => "imageController@imageuploadview"
+));
+Route::post('imageupload/createalbum', array(
+    'as' => 'createalbumsubmit',
+    'uses' => 'imageController@createalbumsubmit'
+));
+Route::post('imageupload/imagesave', array(
+    'as' => 'imageuploadsubmit',
+    'uses' => 'imageController@imageupload'
+));
+Route::get('viewalbum/{name}',
+        array(
+            'as'=>'viewalbum',
+            'uses'=>"imageController@viewalbum"));
