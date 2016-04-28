@@ -70,7 +70,24 @@ Route::post('imageupload/imagesave', array(
     'as' => 'imageuploadsubmit',
     'uses' => 'imageController@imageupload'
 ));
-Route::get('viewalbum/{name}',
-        array(
-            'as'=>'viewalbum',
-            'uses'=>"imageController@viewalbum"));
+Route::get('viewalbum/{name}', array(
+    'as' => 'viewalbum',
+    'uses' => "imageController@viewalbum"));
+Route::get("deletealbum/{name}",array(
+    'as'=>'deletealbum',
+    'uses'=>'imageController@deletealbum'
+));
+//
+Route::get("imagedelete/{name}",array(
+    'as'=> 'imagedelete',
+    'uses'=>'imageController@imagedelete'
+));
+//Route::get('imagedelete','imageController@imagedelete');
+
+Route::get("editalbum/{name}",array(
+    'as'=> 'editalbum',
+    'uses'=>'imageController@editalbum'
+));
+Route::post("imageupload/editalbum",array(
+     'as' =>  "editalbumname",
+    'uses' => "imageController@editalbumname"));

@@ -13,27 +13,28 @@
             @include('imageUpload/userdashboard')
         </nav>
         <div class="container ">
-            
-                @if($Album)
-                @foreach($Album as $Values)
-                @foreach($Values as $value=>$key)
-                @if($value=='Name')
-                <div class="col-md-4 bottom">
-                <div class="panel panel-default">
-                    <div class="panel-body"><h2><a href="{{ URL::route('viewalbum',['name'=>$key])}}">{{$key}}</a></h2></div>
-                    
-                    @else
-                    <div class="panel-footer"><h4><b>Description:</b></h4><p>{{$key}}</p></div>
-                </div>
-                </div>
-                @endif
-                @endforeach
-                @endforeach
-                @else
 
-                <h1>You don't have any albums created</h1>
-                @endif
-            
+            @if($Album)
+            @foreach($Album as $Values)
+            @foreach($Values as $value=>$key)
+            @if($value=='Name')
+            <div class="col-md-4 bottom">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2><a href="{{ URL::route('viewalbum',['name'=>$key])}}">{{$key}}</a></h2></div>
+                    <div class="panel-body borderbottom"><div class="row "><div class="col-md-4 col-md-offset-2"><a href="{{ URL::route('editalbum',['name'=>$key])}}">EDIT</a></div>
+                            <div class="col-md-6"><a href="{{ URL::route('deletealbum',['name'=>$key])}}">DELETE</a></div></div></div>
+                    @else
+                    <div class="panel-body"><h4><b>Description:</b></h4><p>{{$key}}</p></div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+            @endforeach
+            @else
+
+            <h1>You don't have any albums created</h1>
+            @endif
+
         </div>
 
     </body>

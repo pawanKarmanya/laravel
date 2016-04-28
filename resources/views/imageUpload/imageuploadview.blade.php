@@ -4,9 +4,9 @@
         <title>UserCreateAlbum</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
+        <script src="/js/jquery.js" type="text/javascript"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+        <script src="/js/customjs.js"></script>
     </head>
     <body>
         <nav>
@@ -22,13 +22,14 @@
                     <div class="form-group text">
                         <div class="col-sm-4 col-md-offset-3">
                             <input type="file" id="imageupload" name="imageupload" class="form-control " required>
+                            <p id="imageerror"></p>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-md-offset-3">
                             <select class="form-control" name="albumname" required>
-                                <option>Select albums</option>
+                                
                                 @if($Album)
                                 @foreach($Album as $Values)
                                 @foreach($Values as $value=>$key)

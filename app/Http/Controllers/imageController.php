@@ -188,15 +188,74 @@ class imageController extends Controller {
        ));
         }
     }
-    public function hai() {
-        $values = Usermodel::all()->where('UserId', 10);
-        $array = $values->toArray();
-        foreach ($array as $values) {
-            foreach ($values as $x => $key) {
-                echo $x, " ", $key;
-            }
-        }
+    public function deletealbum($name){
+         session()->regenerate();
+        $UserId = session('id');
+        $path='directory/'.$UserId."/".$name;
+         $Album =DB::table('AlbumDetails')->where('UserId', $UserId)->where("Name",$name)->delete();
+        $delete=File::deleteDirectory($path);
+        return 	Redirect::route('albums');
+        
     }
+    
+    public function imagedelete($name){
+        
+        $imagename=  explode(",", $name);
+        $imagepath=implode("/",$imagename);
+       $image=File::delete($imagepath);
+       $array=  explode("/",$imagepath );
+       $length=count($array);
+       $length=$length-2;
+       $album=$array[$length];
+       return 	Redirect::route('viewalbum',['name'=>$album]);
+    }
+    public function editalbum($name){
+        
+        return view('imageUpload/editalbum',array(
+            'albumname'=>$name
+        ));
+        
+    }
+
+    public function editalbumname(){
+        session()->regenerate();
+        $UserId = session('id');
+        $previousname=Input::get('previousname');
+        $newname=Input::get('albumName');
+        $description=Input::get('albumDesc');
+        
+        $path='directory/'.$UserId."/".$previousname;
+        $newpath='directory/'.$UserId."/".$newname."/";
+        $images=File::files($path);
+        foreach($images as $value=>$key){
+           $array=  explode("/",$key);
+           $x=count($array);
+           $x=$x-1;
+          File::move($key,$newpath.$array[$x]);
+        }
+        File::deleteDirectory($path);
+        //File::move('old/file1.jpg', 'new/file1.jpg');
+        DB::table('AlbumDetails')
+            ->where('UserId', $UserId)
+                ->where('Name',$previousname)
+            ->update(['Name' => $newname],
+                    ['Desc' =>$description]);
+    }
+
+    public function hai() {
+        $array=explode( "/",'hello/hai/how/are/you');
+        print_r($array);
+         $x=count($array);
+         $x=$x-2;
+        echo $array[$x];
+        
+        $path='directory/'."1/myalbum";
+        $newpath='directory/'."1/myalbum2/";
+        $images=File::files($path);
+       
+        print_r($images);
+    }
+    
 
 }
 

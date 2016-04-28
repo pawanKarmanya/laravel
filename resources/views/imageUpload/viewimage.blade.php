@@ -22,6 +22,9 @@
             @foreach($images as $value=>$key)
             <div class="col-md-2 ">
             <a href="/{{$key}}" data-lightbox='nondatabasealbum'><img src="/{{$key}}" height="170" width="160"></a><br>
+            <?php $path=explode("/",$key);
+            $path1=  implode(",",$path);?>
+            <a href="{{ URL::route('imagedelete',['name'=>$path1])}}">[X]</a>
             </div>
             @endforeach
 

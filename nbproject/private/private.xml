@@ -10,8 +10,10 @@
             <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/imageUpload/imageuploadview.blade.php</file>
             <file>file:/home/pawan/Karmanya/mydev/laravel/app/Http/routes.php</file>
             <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/imageUpload/useralbum.blade.php</file>
-            <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/imageUpload/userLogin.blade.php</file>
+            <file>file:/home/pawan/Karmanya/mydev/laravel/public/js/formjs.js</file>
             <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/imageUpload/userdashboard.blade.php</file>
+            <file>file:/home/pawan/Karmanya/mydev/laravel/public/js/customjs.js</file>
+            <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/imageUpload/editalbum.blade.php</file>
             <file>file:/home/pawan/Karmanya/mydev/laravel/app/Http/Controllers/imageController.php</file>
         </group>
     </open-files>
