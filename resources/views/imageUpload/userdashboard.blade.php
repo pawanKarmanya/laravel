@@ -25,7 +25,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" id="cloud"><span  class="glyphicon glyphicon-film"></span></a>
                     <ul class="nav navbar-nav">
-                        <li><a><span class="glyphicon glyphicon-user"></span></a></li></ul>
+                        <li><a><span class="glyphicon glyphicon-user"></span> @if(isset($Name)){{$Name}}@endif</a></li></ul>
                     <button type="button" class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="sr-only"> Toggle</span>
                         <span class="icon-bar"></span>

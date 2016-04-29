@@ -96,7 +96,7 @@ $(document).ready(function () {
         }
     });
 
-$("#confirmPassword").keydown(function(){
+$("#confirmPassword").on("keyup focusout",function(){
     var confirmPassword=$("#confirmPassword").val();
     var password=$("#password").val();
     

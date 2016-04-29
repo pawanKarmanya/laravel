@@ -127,11 +127,11 @@ class imageController extends Controller {
         $validateError = null;
         $dt = new DateTime();
         $Time = $dt->format('Y-m-d H:i:s');
-        $path='directory/'.$UserId;
+        $path = 'directory/' . $UserId;
         if (!File::exists($path)) {
             File::makeDirectory($path);
         }
-        File::makeDirectory($path."/".$AlbumName);
+        File::makeDirectory($path . "/" . $AlbumName);
         $Insert = DB::table('AlbumDetails')->insert(
                 ['Name' => $AlbumName,
                     'Desc' => $AlbumDesc,
@@ -149,113 +149,124 @@ class imageController extends Controller {
         ));
     }
 
-    public function imageuploadview(){
-        
+    public function imageuploadview() {
+
         session()->regenerate();
         $UserId = session('id');
         $Album = DB::table('AlbumDetails')->select('Name')->where('UserId', session('id'))->get();
-        return view('imageUpload/imageuploadview',array(
+        return view('imageUpload/imageuploadview', array(
             'Album' => $Album));
     }
-    public function imageupload(){
+
+    public function imageupload() {
         session()->regenerate();
         $UserId = session('id');
         $image = Input::file('imageupload');
-        $album=Input::get('albumname');
-        $path='directory/'.$UserId."/".$album."/";
+        $album = Input::get('albumname');
+        $path = 'directory/' . $UserId . "/" . $album . "/";
         $fileName = Input::file('imageupload')->getClientOriginalName();
-       if( Input::file('imageupload')->move($path, $fileName)){
-        return view('imageUpload/userLogin',array(
-            'message'=>'Image uploaded Successfully'
-       ));
-       }
-       else{
-           return view('imageUpload/userLogin',array(
-            'error'=>'Image could not be uploaded'
-       ));
-       }
-    }
-    public function viewalbum($name){
-        
-        session()->regenerate();
-        $UserId = session('id');
-        $path='directory/'.$UserId."/".$name;
-        $images=File::files($path);
-        if($images){
-            
-             return view('imageUpload/viewimage',array(
-            'images'=>$images
-       ));
+        if (Input::file('imageupload')->move($path, $fileName)) {
+            return view('imageUpload/userLogin', array(
+                'message' => 'Image uploaded Successfully'
+            ));
+        } else {
+            return view('imageUpload/userLogin', array(
+                'error' => 'Image could not be uploaded'
+            ));
         }
-    }
-    public function deletealbum($name){
-         session()->regenerate();
-        $UserId = session('id');
-        $path='directory/'.$UserId."/".$name;
-         $Album =DB::table('AlbumDetails')->where('UserId', $UserId)->where("Name",$name)->delete();
-        $delete=File::deleteDirectory($path);
-        return 	Redirect::route('albums');
-        
-    }
-    
-    public function imagedelete($name){
-        
-        $imagename=  explode(",", $name);
-        $imagepath=implode("/",$imagename);
-       $image=File::delete($imagepath);
-       $array=  explode("/",$imagepath );
-       $length=count($array);
-       $length=$length-2;
-       $album=$array[$length];
-       return 	Redirect::route('viewalbum',['name'=>$album]);
-    }
-    public function editalbum($name){
-        
-        return view('imageUpload/editalbum',array(
-            'albumname'=>$name
-        ));
-        
     }
 
-    public function editalbumname(){
+    public function viewalbum($name) {
+
         session()->regenerate();
         $UserId = session('id');
-        $previousname=Input::get('previousname');
-        $newname=Input::get('albumName');
-        $description=Input::get('albumDesc');
+        $path = 'directory/' . $UserId . "/" . $name;
+        $images = File::files($path);
+       // if ($images) {
+
+            return view('imageUpload/viewimage', array(
+                'images' => $images
+            ));
+        //}
+    }
+
+    public function deletealbum($name) {
         
-        $path='directory/'.$UserId."/".$previousname;
-        $newpath='directory/'.$UserId."/".$newname."/";
-        $images=File::files($path);
-        foreach($images as $value=>$key){
-           $array=  explode("/",$key);
-           $x=count($array);
-           $x=$x-1;
-          File::move($key,$newpath.$array[$x]);
+        session()->regenerate();
+        $UserId = session('id');
+        $path = 'directory/' . $UserId . "/" . $name;
+        $Album = DB::table('AlbumDetails')->where('UserId', $UserId)->where("Name", $name)->delete();
+        $delete = File::deleteDirectory($path);
+        return Redirect::route('albums');
+    }
+
+    public function imagedelete($name) {
+
+        $imagename = explode(",", $name);
+        $imagepath = implode("/", $imagename);
+        $image = File::delete($imagepath);
+        $array = explode("/", $imagepath);
+        $length = count($array);
+        $length = $length - 2;
+        $album = $array[$length];
+        return Redirect::route('viewalbum', ['name' => $album]);
+    }
+
+    public function editalbum($name) {
+
+        return view('imageUpload/editalbum', array(
+            'albumname' => $name
+        ));
+    }
+
+    public function editalbumname() {
+
+        session()->regenerate();
+        $UserId = session('id');
+        $previousname = Input::get('previousname');
+        $newname = Input::get('albumName');
+        $description = Input::get('albumDesc');
+        $path = 'directory/' . $UserId . "/" . $previousname;
+        $newpath = 'directory/' . $UserId . "/" . $newname;
+        if($previousname!=$newname){
+        $images = File::files($path);
+        File::makeDirectory($newpath);
+        foreach ($images as $value => $key) {
+            $array = explode("/", $key);
+            $x = count($array);
+            $x = $x - 1;
+            File::move($key, $newpath . "/" . $array[$x]);
         }
         File::deleteDirectory($path);
-        //File::move('old/file1.jpg', 'new/file1.jpg');
         DB::table('AlbumDetails')
-            ->where('UserId', $UserId)
-                ->where('Name',$previousname)
-            ->update(['Name' => $newname],
-                    ['Desc' =>$description]);
+                ->where('UserId', $UserId)
+                ->where('Name', $previousname)
+                ->update(['Name' => $newname,
+                    'Desc' => $description]);
+        return Redirect::route('albums');
+        }
+        else{
+            
+            DB::table('AlbumDetails')
+                ->where('UserId', $UserId)
+                ->where('Name', $previousname)
+                ->update(['Desc' => $description]);
+        return Redirect::route('albums');
+        }
     }
 
     public function hai() {
-        $array=explode( "/",'hello/hai/how/are/you');
+
+        $array = explode("/", 'hello/hai/how/are/you');
         print_r($array);
-         $x=count($array);
-         $x=$x-2;
+        $x = count($array);
+        $x = $x - 2;
         echo $array[$x];
-        
-        $path='directory/'."1/myalbum";
-        $newpath='directory/'."1/myalbum2/";
-        $images=File::files($path);
-       
+        $path = 'directory/' . "1/myalbum";
+        $newpath = 'directory/' . "1/myalbum2/";
+        $images = File::files($path);
         print_r($images);
     }
-    
 
 }
 
