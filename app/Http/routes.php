@@ -91,3 +91,10 @@ Route::get("editalbum/{name}",array(
 Route::post("imageupload/editalbum",array(
      'as' =>  "editalbumname",
     'uses' => "imageController@editalbumname"));
+
+//  for spellchecker 
+
+Route::get("spellchecker",array(
+    "as"=>"spellchecker",
+    "uses"=>"counterController@spellchecker"));
+Route::post("checkspelling","counterController@checkspelling");
