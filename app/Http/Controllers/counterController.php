@@ -66,7 +66,32 @@ class counterController extends Controller {
         }
         
     }
-
+    public function example($user){
+        return "it worked ".$user;
+        
+    }
+    public function likebutton(){
+        
+        return view('likebutton/like');
+        
+    }
+    public function values(){
+        
+        echo 'hello';
+    }
+    
+   public function temp(){
+       
+       return view('temp');
+   }
+public function temperature(){
+    
+    echo 'hai';
+}
+public function guest(){
+    
+    return view('guestbook/guestbook');
+}
 }
 
 ?>

@@ -98,3 +98,26 @@ Route::get("spellchecker",array(
     "as"=>"spellchecker",
     "uses"=>"counterController@spellchecker"));
 Route::post("checkspelling","counterController@checkspelling");
+
+
+// example
+
+Route::get('example/{user}', array(
+    'as' => 'example',
+    "uses"=>'counterController@example'
+));
+Route::get('likebutton',array(
+    'as'=>'likebutton',
+    'uses'=>'counterController@likebutton'
+));
+Route::post('articlevalues','counterController@values');
+
+Route::get('temp',array(
+    'as'=>'temp',
+    'uses'=>'counterController@temp'
+));
+Route::post('temperature', 'counterController@temperature');
+Route::get('guestbook',array(
+    'as'=>'guestbook',
+    'uses'=>'counterController@guest'
+));
