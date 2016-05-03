@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 //namespace App\Http\Controllers\Redirect;
 
 use File;
@@ -11,7 +12,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Support\Facades\Redirect;
 
-
 class translateController extends Controller {
 
     use AuthorizesRequests,
@@ -19,32 +19,70 @@ class translateController extends Controller {
         DispatchesJobs,
         ValidatesRequests;
 
-    
-    public function  translate(){
-        session_start();
-if(isset($_GET["lang"])){
-    
-    if($_GET["lang"]=="english"){
-        $_SESSION['lang']="english";
+    public function translate($language) {
+        
+        return view('translatepage', ['language' => $language]);
     }
-    if($_GET["lang"]=="spanish"){
-        $_SESSION['lang']="spanish";
+
+    public function main() {
+
+        return view('translatepage', ['language' => "english"]);
     }
-    if($_GET["lang"]=="telugu"){
-        $_SESSION['lang']="telugu";
+
+    public function menu($language) {
+
+        $object = new translateController();
+        $menu = $object->$language();
+        return view('pages/menu',['menu'=>$menu,'language'=>$language]);
     }
+
+    public function english() {
+
+        $lang = array(
+            "hello" => "Hello",
+            "coffee" => "Coffee",
+            "welcome" => "Welcome",
+            "pizza" => "Pizza",
+            "burger" => "Burger",
+            "rice" => "Rice",
+            "icecream" => "Ice Cream"
+        );
+
+        return $lang;
+    }
+
+    public function spanish() {
+
+        $lang = array(
+            "hello" => "Hola",
+            "coffee" => "Café",
+            "welcome" => "Bienvenido",
+            "pizza" => "la pizza",
+            "burger" => "hamburguesa",
+            "rice" => "arroz",
+            "icecream" => "helado"
+        );
+
+
+        return $lang;
+    }
+
+    public function telugu() {
+
+        $lang = array(
+            "hello" => "హలో",
+            "coffee" => "కాఫీ",
+            "welcome" => "స్వాగత",
+            "pizza" => "పిజ్జా",
+            "burger" => "బర్గర్",
+            "rice" => "వరి",
+            "icecream" => "ఐస్ క్రీం"
+        );
+
+
+        return $lang;
+    }
+
 }
-else{
-    
-    $_SESSION['lang']="english";
 
-    }
-
-@include $_SESSION['lang'].'.php';
-
-        return view('translatepage');
-    }
-       
-
-}
 ?>

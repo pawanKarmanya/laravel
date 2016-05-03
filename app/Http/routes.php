@@ -22,6 +22,8 @@ Route::get('/Counter', array(
     'uses' => 'counterController@home'
 ));
 Route::get('templateEngine', 'templateController@engine');
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
 //Image upload website
 
@@ -44,10 +46,7 @@ Route::post('imageupload/registration', array(
     'as' => 'registersubmit',
     'uses' => 'imageController@registersubmit'
 ));
-Route::get('translate', array(
-    "as" => 'translate',
-    'uses' => 'translateController@translate'
-));
+
 Route::get("hai", 'imageController@hai');
 
 Route::get("imageupload/showalbums", array(
@@ -92,13 +91,17 @@ Route::post("imageupload/editalbum",array(
      'as' =>  "editalbumname",
     'uses' => "imageController@editalbumname"));
 
-//  for spellchecker 
+//  for spellchecker
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
 Route::get("spellchecker",array(
     "as"=>"spellchecker",
     "uses"=>"counterController@spellchecker"));
 Route::post("checkspelling","counterController@checkspelling");
 
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
 // example
 
@@ -121,3 +124,100 @@ Route::get('guestbook',array(
     'as'=>'guestbook',
     'uses'=>'counterController@guest'
 ));
+Route::post('guestbooksubmit',
+        array(
+            'as'=>'guestbooksubmit',
+            'uses'=>'counterController@guestsubmit'));
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//shout box start
+
+Route::get('/shoutbox',array(
+    'as'=>'shoutbox',
+    'uses'=>'counterController@shout'
+));
+
+Route::post('shoutboxsubmit',
+        array(
+            'as'=>'shoutboxsubmit',
+            'uses'=>'counterController@shoutboxsubmit'));
+//shout box end
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+
+// translate pages
+
+Route::get('translate/{language}', array(
+    "as" => 'translate',
+    'uses' => 'translateController@translate'
+));
+
+Route::get('translatepage', array(
+    "as" => 'translatepage',
+    'uses' => 'translateController@main'
+));
+Route::any('menu/{language}',array(
+    'as'=>'menu',
+     'uses'=>'translateController@menu'));
+
+// end translate pages
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//Multiple file upload
+
+Route::get('multiplefile',array(
+    'as'=>'multiplefile',
+    'uses'=>'homeController@multiple'
+));
+Route::post('multiplefile',array(
+     'as'=>'multiplefilesubmit',
+     'uses'=>'homeController@filesubmit'));
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//find and replace text
+Route::get('replacetext',array(
+    'as'=>'replacetext',
+    'uses'=>'homeController@replaceview'
+));
+Route::post('Findreplacepost',array(
+    'as'=>'Findreplacepost',
+    'uses'=>'homeController@replace'
+));
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//photo album
+Route::get('photoalbum',array(
+    'as'=>'photoalbum',
+    'uses'=>'photoalbumController@index'
+));
+Route::get('folder/{folder}',array(
+     'as'=>'folder',
+    'uses'=> 'photoalbumController@folder'));
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//currency converter
+
+Route::get('currencyconverter','localController@index');
+Route::post('currencypost',array(
+    'as'=>'currencypost',
+    'uses'=>'localController@convertor'
+));
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+
+//chat window
+
+Route::get('chatwindow/{name}',array(
+    'as'=>'chatwindow',
+    'uses'=>'chatController@chat'
+));
+Route::post('chatsubmit',array(
+    'as'=>'chatsubmit',
+     'uses'=>'chatController@chatsubmit'));
+
+Route::post('/getchat','chatController@getchat');
+
+
+

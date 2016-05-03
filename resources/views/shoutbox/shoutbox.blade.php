@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Guest Book</title>
+        <title>shoutbox</title>
         <script src="/js/jquery.js"></script>
         <script src="/js/likebutton.js"></script>
         <style>
@@ -10,7 +10,7 @@
             }
             .border{
                 margin-top: 40px;
-                height: 150px;
+                height: 300px;
                 border-bottom: 1px solid #C1C1C1;
                  border-left: 1px solid #C1C1C1;
                 overflow-style: scrollbar;
@@ -20,7 +20,7 @@
     </head>
     <body>
         <nav>
-            @include('guestbook/dashboard')
+            @include('shoutbox/dashboard')
         </nav>
         <div class="container">
 
@@ -29,43 +29,40 @@
                 @foreach($array as $value)
                 @foreach($value as $values=>$key)
                 @if($values=='name')
-                <p>Posted by: {{$key}}
-                @endif
-                @if($values=='email')
-                ({{$key}})</p>
+                <p>{{$key}} -
                 @endif
                 @if($values=='message')
-                <p>{{$key}}</p>
+                {{$key}}</p>
                 @endif
                 @endforeach
                 @endforeach
                 @endif
                 
             </div>
-            <form method="post" action="{{ URL::route('guestbooksubmit')}}">
+            <form method="post" action="{{ URL::route('shoutboxsubmit')}}">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                       
-                <div class="col-md-12">
-                    <div class="form-group top col-md-5 ">
+                <div class="col-md-12 top">     
+                <div class="col-md-2">
+                    <div class="form-group">
                         <label for='name' class="control-label">Name:</label>
-                        <input type="text" id='name' name="name" class="form-control">
+                        <input type="text" id='name' name="name" value="guest" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group  col-md-5 ">
-                        <label for='email' class="control-label">Email:</label>
-                        <input type="email" id='email' name="email" class="form-control">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for='message' class="control-label">Shout:</label>
+                        <input type="text" id='message' name="message" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group  col-md-5">
-                        <label for='message' class="control-label">Message:</label>
-                        <textarea class="form-control" name="message" rows="5" id='message'></textarea>
+                
+                <div class="col-md-1">
+                    <div class="form-group">
+                        
+                        <label  class="control-label">  </label>
+                    <input type="submit" value="Shout" class="btn btn-default">
+                </div>
+                </div>
                     </div>
-                </div>
-                <div class="col-md-1 col-md-offset-2">
-                    <input type="submit" class="btn btn-default">
-                </div>
             </form>
 
 

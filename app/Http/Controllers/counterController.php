@@ -90,8 +90,33 @@ public function temperature(){
 }
 public function guest(){
     
-    return view('guestbook/guestbook');
+    $array=DB::table('guestbook')->get();
+    return view('guestbook/guestbook',['array'=>$array]);
 }
+
+public function guestsubmit(){
+    
+    $name=Input::get('name');
+    $email=Input::get('email');
+    $message=Input::get('message');
+    $query=DB::table('guestbook')->insert(['name'=>$name, 'email'=>$email,'message'=>$message]);
+    return Redirect::Route('guestbook');
+}
+
+public function shout(){
+    
+    $array=DB::table('shoutbox')->get();
+    return view('shoutbox/shoutbox',['array'=>$array]);
+}
+public function shoutboxsubmit(){
+    
+    
+    $name=Input::get('name');
+    $message=Input::get('message');
+    $query=DB::table('shoutbox')->insert(['name'=>$name,'message'=>$message]);
+    return Redirect::Route('shoutbox');
+}
+
 }
 
 ?>

@@ -26,7 +26,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav ">
-                        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li ><a href="{{URL::route('translate',['language'=>$language])}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li ><a href="menu.php"><span class="glyphicon glyphicon-glass"></span> Menu</a></li>
                      
 
