@@ -28,3 +28,15 @@
 .top{
     margin-top: 40px;
 }
+.box{
+    
+    padding-left: 105px;
+    padding-bottom: 25px;
+    border: 1px solid #CCCCCC;
+    background: #ccc;
+    border-radius: 5px;
+    
+}
+.header{
+   padding-left: 75px;
+}

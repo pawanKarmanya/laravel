@@ -69,6 +69,18 @@ class localController extends Controller {
         $message="Your search for ".$search." produced these results";
         return view('searchengine/searchengine',['result'=>$returnvalue,'message'=>$message]);
     }
+    
+    public function mailinglist(){
+        
+        $mail=DB::table('mailinglist')->select('name','email')->get();
+        return view('mailinglist/mailview',['mail'=>$mail]);
+        
+    }
+    
+    public function maillistsubmit(){
+        $value=Input::get('mail');
+        print_r($value);
+    }
 }
 
 ?>

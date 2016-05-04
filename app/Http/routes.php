@@ -1,27 +1,17 @@
 <?php
 
-/*
-  |--------------------------------------------------------------------------
-  | Application Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register all of the routes for an application.
-  | It's a breeze. Simply tell Laravel the URIs it should respond to
-  | and give it the controller to call when that URI is requested.
-  |
- */
-
 Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::post('submit', 'homeController@shout');
+
 Route::get('/Counter', array(
     'as' => 'Counter',
     'uses' => 'counterController@home'
 ));
 Route::get('templateEngine', 'templateController@engine');
+
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 
@@ -241,3 +231,24 @@ Route::post('searchengine/result',array(
     'as'=>'searchenginesubmit',
     'uses'=>'localController@searchengine'
 ));
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+
+Route::get('mailinglist',array(
+    'as'=>'mailinglist',
+    'uses'=>'localController@mailinglist'
+));
+Route::post('maillistsubmit',array(
+    'as'=>'maillistsubmit',
+    'uses'=> 'localController@maillistsubmit'));
+
+
+
+
+
+
+
+
+
+
