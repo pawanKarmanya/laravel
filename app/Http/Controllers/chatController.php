@@ -27,12 +27,47 @@ class chatController extends Controller {
     }
     public function chatsubmit(){
         
-        
+        $message=Input::get('message');
+        $name=Input::get('name');
+        DB::table('chatwindow')->insert(['name'=>$name,'message'=>$message]);
+        return Redirect::route('chatwindow',['name'=>$name]);
     }
     public function getchat(){
-        
+        $returnvalue=null;
        $result= DB::table('chatwindow')->get();
-       return $result;
+       foreach($result as $values){
+           foreach($values as $value=>$key){
+               if($value=='name'){
+                   $returnvalue.="<p>".$key." -";
+               }
+               else{
+                   $returnvalue.= $key."</p>";
+               }
+               
+           }
+       }
+       echo $returnvalue;
+    }
+    
+    public function auto(){
+        
+        return view('autosuggest/autosuggest');
+    }
+    
+    public function autosuggest(){
+        $result=null;
+        $search=Input::get('search_term');
+        if($search!=""){
+            
+            $fetch=DB::table('autosuggest')->select('city')->where('city','like',$search.'%')->get();
+            foreach($fetch as $value){
+                foreach($value as $values=>$key){
+                    $result.="<li>".$key."</li>";
+                }
+            }
+            
+        }
+        return $result;
     }
 }
 

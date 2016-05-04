@@ -213,11 +213,31 @@ Route::get('chatwindow/{name}',array(
     'as'=>'chatwindow',
     'uses'=>'chatController@chat'
 ));
-Route::post('chatsubmit',array(
-    'as'=>'chatsubmit',
-     'uses'=>'chatController@chatsubmit'));
+Route::post('/chatsubmit','chatController@chatsubmit');
 
 Route::post('/getchat','chatController@getchat');
 
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
+//Auto Suggest
 
+Route::get('autosuggest',array(
+    'as'=>'autosuggest',
+    'uses'=>'chatController@auto'
+));
+
+Route::post('/autosuggestget','chatController@autosuggest');
+
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//search engine
+
+Route::get('searchengine',array(
+    'as'=>'searchengine',
+    'uses'=>'localController@search'
+));
+Route::post('searchengine/result',array(
+    'as'=>'searchenginesubmit',
+    'uses'=>'localController@searchengine'
+));

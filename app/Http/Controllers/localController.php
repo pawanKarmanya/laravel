@@ -42,7 +42,33 @@ class localController extends Controller {
         $converted_amount = preg_replace("/[^0-9\.]/", null, $get[0]);
         return view('currency/CurrencyConvert', ['converted_currency' => $converted_amount]);
     }
+    
+    public function search(){
+        
+        return view('searchengine/searchengine');
+    }
 
+    public function searchengine(){
+        $returnvalue=null;
+        $search=Input::get('search');
+        if($search!=""){
+        $result=DB::table('search')->select('title','description','url')->where('keywords','like',"%".$search."%")->get();
+        foreach($result as $values){
+            foreach($values as $value=>$key){
+                if($value=="title"){
+                    $returnvalue.="<p><b>".$key."</b></p>";
+                }
+                if($value=="description"){
+                    $returnvalue.="<p>".$key."</p>";
+                }
+                if($value=="url"){
+                    $returnvalue.="<p><a href='".$key."'>".$key."</a></p>";
+                }
+            }
+        }}
+        $message="Your search for ".$search." produced these results";
+        return view('searchengine/searchengine',['result'=>$returnvalue,'message'=>$message]);
+    }
 }
 
 ?>

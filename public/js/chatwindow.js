@@ -1,9 +1,32 @@
-   function getChat() {
+$(document).ready(function () {
+
+    $("#message").keydown(function (e) {
+
+        if (e.which == '13') {
+
+            var data = $("#message").val();
+            
+             $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/chatsubmit',
+            type: 'post',
+            data: {message: data,name:name},
+            success: function (data) {
+                $("#message").val("");
+            }
+        });
+        }
+    });
+
+ function getChat() {
 
         var word = null;
         $.ajaxSetup({
             headers: {
-                
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
@@ -12,10 +35,15 @@
             type: 'post',
             data: {word: word},
             success: function (data) {
-                alert(data);
+
+                $('.border').html(data);
             }
         });
     }
 
-    getChat();
 
+
+    setInterval(function () {
+        getChat();
+    }, 1000);
+});
