@@ -70,11 +70,7 @@ class counterController extends Controller {
         return "it worked ".$user;
         
     }
-    public function likebutton(){
-        
-        return view('likebutton/like');
-        
-    }
+    
     public function values(){
         
         echo 'hello';

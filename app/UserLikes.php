@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usermodel extends Model
+class UserLikes extends Model
 {
     //
-    protected $table='likes';
+    protected $table='userlikes';
 }

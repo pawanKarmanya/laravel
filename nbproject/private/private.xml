@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/chatwindow/dashboard.blade.php</file>
             <file>file:/home/pawan/Karmanya/mydev/laravel/app/Http/routes.php</file>
-            <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/chatwindow/chatwindow.blade.php</file>
-            <file>file:/home/pawan/Karmanya/mydev/laravel/app/Http/Controllers/chatController.php</file>
-            <file>file:/home/pawan/Karmanya/mydev/laravel/public/js/chatwindow.js</file>
+            <file>file:/home/pawan/Karmanya/mydev/laravel/resources/views/mailinglist/mailview.blade.php</file>
+            <file>file:/home/pawan/Karmanya/mydev/laravel/app/Http/Controllers/localController.php</file>
         </group>
     </open-files>
 </project-private>

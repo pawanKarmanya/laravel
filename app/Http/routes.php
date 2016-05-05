@@ -99,10 +99,6 @@ Route::get('example/{user}', array(
     'as' => 'example',
     "uses"=>'counterController@example'
 ));
-Route::get('likebutton',array(
-    'as'=>'likebutton',
-    'uses'=>'counterController@likebutton'
-));
 Route::post('articlevalues','counterController@values');
 
 Route::get('temp',array(
@@ -235,15 +231,25 @@ Route::post('searchengine/result',array(
 //------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------
 
+//Mailing list
 Route::get('mailinglist',array(
     'as'=>'mailinglist',
     'uses'=>'localController@mailinglist'
 ));
-Route::post('maillistsubmit',array(
-    'as'=>'maillistsubmit',
+Route::post('mailinglist/maillistsubmit',array(
+    'as'=>'mailinglist/maillistsubmit',
     'uses'=> 'localController@maillistsubmit'));
 
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
 
+//Like button
+
+Route::get('likebutton/{name}',array(
+    'as'=>'likebutton',
+    'uses'=>'likebuttonController@likebutton'
+));
+Route::post('like','likebuttonController@like');
 
 
 

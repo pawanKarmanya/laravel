@@ -8,6 +8,13 @@
        
     </head>
     <body>
-            <input type="text" id="word">
+        <nav>
+            @include('likebutton/dashboard')
+        </nav>
+        <?php $count=count($article);?>
+        @for($x=0;$x<$count;$x++)
+        {{$article[$x]['name']}}
+        @endfor
+            
     </body>
 </html>
