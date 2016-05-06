@@ -113,6 +113,11 @@ public function shoutboxsubmit(){
     return Redirect::Route('shoutbox');
 }
 
+  public function websiteupordown() {
+
+        return View('users/upordown');
+    }
+
 }
 
 ?>

@@ -30,7 +30,9 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse">
-                    
+                    <ul class="nav navbar-nav pull-right">
+                        <li ><a href="{{ URL::route('minishoppingcart')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>

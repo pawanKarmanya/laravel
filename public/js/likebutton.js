@@ -26,3 +26,8 @@ $(document).ready(function () {
     });
 
 });
+
+function like(obj){
+   var number=  $(obj).val();
+   $("#"+number).html("h");
+}
