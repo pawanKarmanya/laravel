@@ -55,6 +55,8 @@
             </table>
                 </div>
             </div>
+            @if($total>0)
+            
           <div class=" col-md-5 col-md-offset-5">
             <form method="post" action="{{ URL::route('payment')}}">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -62,6 +64,7 @@
                 <input type="submit" class="btn btn-success" value="MakePayment">
             </form>
             </div>
+            @endif
         </div>
     </body>
 </html>

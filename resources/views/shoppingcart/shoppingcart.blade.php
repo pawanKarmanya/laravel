@@ -18,8 +18,9 @@
                 
             </div>
             
-            <div class="col-md-5 col-md-offset-3">
+            <div class="col-md-12">
                 @foreach($product as $values)
+                <div class="col-md-5 col-md-offset-1 well">
                 @foreach($values as $value=>$key)
                 @if($value=='Id')
                 <?php $id=$key;?>
@@ -34,10 +35,11 @@
                 @endif
                 @endif
                 @endforeach
+                </div>
                 @endforeach
                 
             </div>
-            <div class="checkout col-md-5 col-md-offset-3">
+            <div class="checkout col-md-5 col-md-offset-5">
             <form method="post" action="{{ URL::route('checkout')}}">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="submit" class="btn btn-success" value="Checkout">

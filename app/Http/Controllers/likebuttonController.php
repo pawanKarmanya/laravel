@@ -90,7 +90,13 @@ class likebuttonController extends Controller {
     
     public function deductproduct($id){
         
-            DB::table('Tempcart')->where('productid','=',$id)->decrement('quantity');
+            $product=DB::table('Tempcart')->where('productid','=',$id)->get();
+            $productlast=json_decode(json_encode($product), true);
+            if($productlast[0]['quantity']>1){
+            
+                DB::table('Tempcart')->where('productid','=',$id)->decrement('quantity');
+            
+            }
             $obj=new likebuttonController();
             return $obj->checkout();
     }
