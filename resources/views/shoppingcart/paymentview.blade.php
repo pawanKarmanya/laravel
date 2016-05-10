@@ -30,11 +30,13 @@
                  <div class="col-sm-12 top">
                      <h2><u>Total</u> <u>Payment</u>: {{$price}}</h2>
                  </div>
+                    <input type="hidden" name="price" value="{{$price}}">
+                    
                 <div class="col-sm-2 col-sm-offset-3 top">
                 <input type="submit" class="btn btn-success" value="MakePayment">
                 </div>
             </form>
             </div>
-        </div>
+       
     </body>
 </html>
