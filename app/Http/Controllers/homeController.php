@@ -11,61 +11,101 @@ use App\model\User;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
-class homeController extends Controller
-{
-    use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
-    public function multiple(){
-        
+class homeController extends Controller {
+
+    use AuthorizesRequests,
+        AuthorizesResources,
+        DispatchesJobs,
+        ValidatesRequests;
+
+    public function multiple() {
+
         return view('multiple/multiplefileupload');
-        
     }
-    
-    public function filesubmit(){
-        $filename=null;
-        $x=0;
-        $validate=null;
-        $message=null;
+
+    public function filesubmit() {
+        $filename = null;
+        $x = 0;
+        $validate = null;
+        $message = null;
         $file = Input::file('file');
-      $path="uploads/multipleuploads/";
-        foreach($file as $value){
-           
-               $filename[$x]=$value->getClientOriginalName();
-               $validate=$value->move($path, $filename[$x]);
-           $x++;
-       }
-       if($validate){
-           $message='uploaded successfully';
-       }
-      else{
-          $message='file could not be uploaded try again';
-      }
-    return view('multiple/multiplefileupload',['message'=>$message]);
+        $path = "uploads/multipleuploads/";
+        foreach ($file as $value) {
+
+            $filename[$x] = $value->getClientOriginalName();
+            $validate = $value->move($path, $filename[$x]);
+            $x++;
+        }
+        if ($validate) {
+            $message = 'uploaded successfully';
+        } else {
+            $message = 'file could not be uploaded try again';
+        }
+        return view('multiple/multiplefileupload', ['message' => $message]);
     }
-    
-    
-    public function replaceview(){
-    
+
+    public function main() {
+
+        return view('multiple/securefile');
+    }
+
+    public function upload() {
+        $filename = null;
+        $x = 0;
+        $validate = null;
+        $message = null;
+        $file = Input::file('file');
+        $path = "uploads/multipleuploads/";
+        $size = File::size($file);
+
+        $extension = array('jpg', 'jpeg', 'png', 'gif');
+        @$validation = strtolower(end(explode(".",$file->getClientOriginalName() )));
+        if (in_array($validation, $extension)) {
+       
+        if ($size < 2000000) {
+
+            $filename = $file->getClientOriginalName();
+            $validate = $file->move($path, $filename);
+        } else {
+
+            $message .= 'file size should not be more than 2Mb';
+        }
+        if ($validate) {
+            $message .= 'uploaded successfully';
+        } else {
+            $message .= 'file could not be uploaded try again';
+        }
+        }
+        else{
+            
+            $message.="Only image files can be uploaded";
+        }
+
+        return view('multiple/securefile', ['message' => $message]);
+    }
+
+    public function replaceview() {
+
         return view('replacetext/replaceview');
     }
-    public function replace(){
-        
-        
-         $replace=Input::get('replace');
-       $find=Input::get('find');
-     $message=Input::get('text');
-          $find_explode=explode(',',$find);
-           $replace_explode=explode(',',$replace);
-   for($x=0;$x<count($find_explode);++$x){
-       
-        $find_explo[$x]="/".trim($find_explode[$x])."/";
-   } 
-   // $replace=(empty($replace)==false)?  preg_split('/,\s+/', $input['replace']):"";
-  //$text=(empty($find)===FALSE && empty($replace)===FALSE)? str_replace($find, $replace,$input['text']):$input['text'];
-  $text=  preg_replace($find_explo, $replace_explode, $message);
-     return view('replacetext/replaceview',['text'=>$text]);
-   
-        
+
+    public function replace() {
+
+
+        $replace = Input::get('replace');
+        $find = Input::get('find');
+        $message = Input::get('text');
+        $find_explode = explode(',', $find);
+        $replace_explode = explode(',', $replace);
+        for ($x = 0; $x < count($find_explode); ++$x) {
+
+            $find_explo[$x] = "/" . trim($find_explode[$x]) . "/";
+        }
+        // $replace=(empty($replace)==false)?  preg_split('/,\s+/', $input['replace']):"";
+        //$text=(empty($find)===FALSE && empty($replace)===FALSE)? str_replace($find, $replace,$input['text']):$input['text'];
+        $text = preg_replace($find_explo, $replace_explode, $message);
+        return view('replacetext/replaceview', ['text' => $text]);
     }
-    
+
 }

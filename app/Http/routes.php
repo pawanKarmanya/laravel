@@ -360,11 +360,18 @@ Route::get('StringFun','StringFunController@index');
 //watermartk-------------------------------------------------------------------------------------
 Route::get('createimage','watermarkController@index');
 
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//secure file upload
 
+Route::get('secureupload','homeController@main');
+Route::post('secureupload', array(
+    'as' => 'securefilesubmit',
+    'uses' => 'homeController@upload'));
 
+//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------
+//Auth
+Route::auth();
 
-
-
-
-
-
+Route::get('/home', 'HomeController@index');

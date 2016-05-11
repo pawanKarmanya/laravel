@@ -109,6 +109,7 @@ class LikeController extends BaseController {
 //
 
     function add_likes($article_id) {
+        
         $article_id = (int) $article_id;
         DB::table('LikeArticles')->where('ArticleId', $article_id)->update(['ArticleLike' => 'ArticleLike' + 1]);
         DB::table('LikeForm')->insert(['UserId' => session()->get('user_id'), 'ArticleId' => $article_id]);
